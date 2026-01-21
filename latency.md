@@ -14,7 +14,6 @@ Latency benchmarking using **vLLM** / **text-generation-inference** could not be
 
 - **LoRA fine-tuning** does not materially change model size
 - **Expected latency delta:** Within ~3–5% of the base model
-- **Model selection rationale:** Switched from 7B → Qwen2.5-0.5B to operate within memory limits and enable concurrency experiments
 
 ---
 
