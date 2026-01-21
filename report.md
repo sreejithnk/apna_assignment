@@ -50,7 +50,6 @@ Expected JSON output
 
 - **No few-shot examples** in the prompt
 - **JSON schema learned implicitly** from supervised labels
-- **Same system prompt** used for training, evaluation, and serving (avoids train–serve mismatch and reduces inference latency)
 
 ### Dataset Coverage
 
