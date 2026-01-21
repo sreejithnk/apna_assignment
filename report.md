@@ -10,7 +10,6 @@ This project fine-tunes a small instruction model to perform structured informat
   - English → Latin
 - **No explanations or reasoning text**
 
-The focus is on robustness and production feasibility, not model size.
 
 ---
 
@@ -63,8 +62,6 @@ A custom Hinglish dataset was created, covering:
 - Numeric expressions ("1.25 lakh", "सवा लाख")
 - Adversarial instructions ("ignore JSON", "explain reasoning")
 
-A 100-case stress suite is provided separately in JSONL format.
-
 ---
 
 ## Evaluation
@@ -96,18 +93,15 @@ All outputs are schema-validated programmatically.
 
 1. **JSON Validity: 65% → 72%** (+7%)
    - Base model struggled with malformed JSON output structure
-   - Fine-tuning improved syntax adherence but still below 99% production threshold
    - Indicates need for constrained decoding or post-validation in production
 
 2. **Slot Score: 0% → 39.5%** (+39.5%)
    - Base model had **zero slot extraction capability** (untrained)
    - Fine-tuning successfully enabled structured entity extraction
-   - 39.5% F1 is meaningful progress but requires additional training for production (target: 85%)
 
 3. **Script Compliance: 35.4% → 62.4%** (+27%)
    - Base model mixed scripts significantly (Latin/Devanagari confusion)
    - Fine-tuning improved script correctness by 27 percentage points
-   - Still below 97% production threshold; needs adversarial examples + script-specific loss
 
 ### Gap Analysis: Current vs Production Targets
 
@@ -120,19 +114,16 @@ All outputs are schema-validated programmatically.
 ### Recommended Next Steps to Close Gap
 
 1. **For JSON Validity (+27%):**
-   - Increase training examples from 100 → 500
-   - Add adversarial examples: malformed JSON in input ("ignore JSON rules")
+   - Increase training examples from 300 → 1000
    - Implement post-generation validation with retry logic
 
 2. **For Slot F1 (+45.5%):**
    - Expand dataset with entity-rich examples (names, amounts, dates)
    - Use active learning: collect production failures and retrain monthly
-   - Increase LoRA rank from 8 → 16 for more expressiveness
 
 3. **For Script Compliance (+34.6%):**
-   - Create script-violation adversarial dataset (Latin in Hindi fields, etc.)
-   - Add script classification loss during training
-   - Fine-tune with mixed-script penalty
+   - Increase training examples from 300 → 1000
+   
 
 ---
 
@@ -170,7 +161,7 @@ Client → Async API → vLLM → Fine-tuned Model → JSON Validator
 | Script compliance | ≥ 97% |
 | Slot F1 | ≥ 85% |
 
-A data flywheel logs only normalized, PII-safe text and focuses on failure-driven retraining.
+Logs PII-safe text and focuses on failure-driven retraining.
 
 ---
 
