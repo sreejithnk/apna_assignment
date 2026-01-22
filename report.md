@@ -80,13 +80,22 @@ All outputs are schema-validated programmatically.
 
 ## Results & Evaluation Metrics
 
-### Performance Improvement: Before vs After Fine-tuning
+### Performance Improvement on Training Data: Before vs After Fine-tuning
 
 | Metric | Before Fine-tuning | After Fine-tuning | Improvement |
 |--------|-------------------|-------------------|-------------|
 | **JSON Validity Rate** | 65% | 72% | +7% |
 | **Slot Score (F1)** | 0% | 39.5% | +39.5% |
 | **Script Compliance** | 35.4% | 62.4% | +27% |
+
+### Performance Improvement on Test Data: Before vs After Fine-tuning
+
+| Metric | Before Fine-tuning | After Fine-tuning | Improvement |
+|--------|-------------------|-------------------|-------------|
+| **JSON Validity Rate** | 76% | 77% | +0% |
+| **Slot Score (F1)** | 0% | 12.5% | +12.5% |
+| **Script Compliance** | 40.3% | 53.9% | +14% |
+
 
 ### Key Insights
 
